@@ -1,5 +1,5 @@
 """
-Custom integration to integrate FoxESS Modbus with Home Assistant.
+Custom integration to integrate Sundue Modbus with Home Assistant.
 
 For more details about this integration, please refer to
 https://github.com/nathanmarlor/foxess_modbus

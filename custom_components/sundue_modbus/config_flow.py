@@ -1,4 +1,4 @@
-"""Adds config flow for foxess_modbus."""
+"""Adds config flow for sundue_modbus."""
 import copy
 import logging
 import re

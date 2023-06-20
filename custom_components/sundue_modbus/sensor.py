@@ -1,4 +1,4 @@
-"""Sensor platform for foxess_modbus."""
+"""Sensor platform for sundue_modbus."""
 import logging
 
 from homeassistant.components.sensor import SensorEntity

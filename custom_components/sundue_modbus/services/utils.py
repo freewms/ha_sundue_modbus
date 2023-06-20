@@ -29,7 +29,7 @@ def get_controller_from_friendly_name_or_device_id(
         # We rely on the format set by ModbusEntityMixin.device_info
         if len(parts) < 4 or parts[0] != DOMAIN:
             raise HomeAssistantError(
-                f"Device with ID '{device_id}' is not an inverter from the foxess_modbus integration"
+                f"Device with ID '{device_id}' is not an inverter from the sundue_modbus integration"
             )
         friendly_name = parts[3]  # type: ignore
     else:

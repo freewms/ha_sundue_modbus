@@ -1,4 +1,4 @@
-"""Constants for foxess_modbus."""
+"""Constants for sundue_modbus."""
 # Base component constants
 NAME = "sundue_modbus"
 DOMAIN = "sundue_modbus"

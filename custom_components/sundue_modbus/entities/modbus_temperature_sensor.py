@@ -26,7 +26,7 @@ from .modbus_entity_mixin import ModbusEntityMixin
 
 _LOGGER = logging.getLogger(__name__)
 
-@dataclass()
+@dataclass(kw_only=True)
 class ModbusTemperatureSensorDescription(SensorEntityDescription, EntityFactory):
     """Custom temperature sensor description"""
 

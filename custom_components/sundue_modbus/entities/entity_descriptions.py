@@ -48,7 +48,7 @@ def _sun_temperature(key: str, addresses: list[ModbusAddressesSpec], name: str) 
         name=name,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement="C",
+        native_unit_of_measurement="°C",
         scale=1,
         round_to=1,
         
@@ -1142,7 +1142,7 @@ _INVERTER_ENTITIES: list[EntityFactory] = [
     ),
     ModbusInverterStateSensorDescription(
         key="sundue_state",
-        address=[ModbusAddressSpec(models=[SUN1], holding=4)],
+        address=[ModbusAddressSpec(models=[SUN1], holding=200)],
         name="Sundue state",
         states=SUN1_STATES,
     ),

@@ -11,7 +11,7 @@ from typing import TypeVar
 from typing import cast
 
 from homeassistant.core import HomeAssistant
-from pymodbus.client import ModbusSerialClient
+#from pymodbus.client import ModbusSerialClient
 from pymodbus.client import ModbusTcpClient
 from pymodbus.client import ModbusUdpClient
 from pymodbus.exceptions import ConnectionException
@@ -135,10 +135,10 @@ class CustomModbusTcpClient(ModbusTcpClient):
 
 
 _CLIENTS = {
-    SERIAL: {
-        "client": ModbusSerialClient,
-        "framer": ModbusRtuFramer,
-    },
+    #SERIAL: {
+    #    "client": ModbusSerialClient,
+    #    "framer": ModbusRtuFramer,
+    #},
     TCP: {
         "client": CustomModbusTcpClient,
         "framer": ModbusSocketFramer,
@@ -176,7 +176,8 @@ class ModbusClient:
 
         # Some serial devices need a short delay after polling. Also do this for the inverter, just
         # in case it helps.
-        self._poll_delay = 30 / 1000 if protocol == SERIAL or adapter.connection_type == LAN else 0
+        # self._poll_delay = 30 / 1000 if protocol == SERIAL or adapter.connection_type == LAN else 0
+        self._poll_delay = 30 / 1000 if adapter.connection_type == LAN else 0
 
         self._client = client["client"](**config)
 
@@ -294,8 +295,8 @@ class ModbusClient:
             return result
 
     def __str__(self) -> str:
-        if self._protocol == SERIAL:
-            return f"{self._config['port']}"
+        #if self._protocol == SERIAL:
+        #    return f"{self._config['port']}"
         return f"{self._protocol}://{self._config['host']}:{self._config['port']}"
 
 

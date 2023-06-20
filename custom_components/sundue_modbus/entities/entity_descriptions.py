@@ -1612,11 +1612,48 @@ _CONFIGURATION_ENTITIES: list[EntityFactory] = [
 ]
 _TEMPERATURE_ENTITIES: list[EntityFactory] = [
     ModbusTemperatureSensorDescription(
-        key="exhaust_coolant_temp",
-        addresses=[ModbusAddressesSpec(models=[SUN1], holding=[59, 60])],
-        name="Exhaust coolant temperature",                
-        icon="mdi:coolant-temperature",
+        key="indoor_temp",
+        addresses=[ModbusAddressesSpec(models=[SUN1], holding=[44, 45])],
+        name="Indoor temperature",                
+        icon="mdi:home-thermometer-outline",
+        round_to= 2,
     ),
+    ModbusTemperatureSensorDescription(
+        key="supply_glycol_temp",
+        addresses=[ModbusAddressesSpec(models=[SUN1], holding=[47, 48])],
+        name="Supply glycol temperature",                
+        icon="mdi:hydraulic-oil-temperature",
+        round_to= 2,
+    ),
+    ModbusTemperatureSensorDescription(
+        key="return_glycol_temp",
+        addresses=[ModbusAddressesSpec(models=[SUN1], holding=[50, 51])],
+        name="Return glycol temperature",                
+        icon="mdi:hydraulic-oil-temperature",
+        round_to= 2,
+    ),
+    ModbusTemperatureSensorDescription(
+        key="return_coolant_temp",
+        addresses=[ModbusAddressesSpec(models=[SUN1], holding=[56, 57])],
+        name="Return coolant temperature",                
+        icon="mdi:coolant-temperature",
+        round_to= 2,
+    ),
+    ModbusTemperatureSensorDescription(
+        key="supply_coolant_temp",
+        addresses=[ModbusAddressesSpec(models=[SUN1], holding=[59, 60])],
+        name="Supply coolant temperature",                
+        icon="mdi:coolant-temperature",
+        round_to= 2,
+    ),
+    ModbusTemperatureSensorDescription(
+        key="water_boiler_temp",
+        addresses=[ModbusAddressesSpec(models=[SUN1], holding=[62, 63])],
+        name="Hot water boiler temperature",                
+        icon="mdi:water-thermometer",
+        round_to= 2,
+    ),
+
 ]
 ENTITIES: list[EntityFactory] = (
     _PV_ENTITIES

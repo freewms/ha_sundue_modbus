@@ -336,16 +336,17 @@ class ModbusController(EntityController, UnloadController):
                 start_address += adapter.max_read
 
             # Stop as soon as we find something non-printable-ASCII
-            full_model = "SUN"
+            full_model = ""
             for char in result:
-                _LOGGER.error("Char raed '%s' (%s)", full_model, char)
-                # Only number of modification 
-                if 0x30 <= char < 0x38:
-                    full_model += chr(char)
+                # Only number of modification (Droid or Рекуператор+ТН)
+                if char == 1:
+                    full_model = "Droid"
+                elif char == 2:
+                    full_model = "Рекуператор+ТН"
                 else:
                     break
             # Take off tailing spaces and H3's leading space
-            full_model = full_model.strip()     
+            # full_model = full_model.strip()     
             for model in INVERTER_PROFILES.values():
                 if full_model.startswith(model.model):
                     _LOGGER.info("Autodetected inverter as '%s' (%s)", model.model, full_model)

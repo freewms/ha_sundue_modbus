@@ -22,7 +22,7 @@ KH = "KH"
 H3 = "H3"
 AIO_H3 = "AIO-H3"
 SUN1 = "Droid"
-SUN2 = "Рекуператор + ТН"
+SUN2 = "Рекуператор+ТН"
 
 # Platforms
 SENSOR = "sensor"

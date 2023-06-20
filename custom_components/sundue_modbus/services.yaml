@@ -43,7 +43,7 @@ update_charge_period:
       example: "''"
       selector:
         device:
-          integration: foxess_modbus
+          integration: sundue_modbus
           entity:
             # Only charge periods provide binary_sensors with class power, for charge period on/off
             domain: "binary_sensor"

@@ -1,10 +1,10 @@
 """Constants for foxess_modbus."""
 # Base component constants
-NAME = "foxess_modbus"
-DOMAIN = "foxess_modbus"
+NAME = "sundue_modbus"
+DOMAIN = "sundue_modbus"
 DOMAIN_DATA = f"{DOMAIN}_data"
 
-ISSUE_URL = "https://github.com/nathanmarlor/foxess_modbus/issues"
+ISSUE_URL = "https://github.com/freewms/ha_sundue_modbus/issues"
 
 # Icons
 ICON = "mdi:format-quote-close"
@@ -21,6 +21,8 @@ AIO_H1 = "AIO-H1"
 KH = "KH"
 H3 = "H3"
 AIO_H3 = "AIO-H3"
+SUN1 = "Droid"
+SUN2 = "Рекуператор + ТН"
 
 # Platforms
 SENSOR = "sensor"
@@ -55,8 +57,8 @@ CONFIG_SAVE_TIME = "save_time"
 HOST = "host"
 TCP = "tcp"
 UDP = "udp"
-SERIAL = "serial"
-RTU_OVER_TCP = "rtu_over_tcp"
+#SERIAL = "serial"
+#RTU_OVER_TCP = "rtu_over_tcp"
 
 CONTROLLER = "controllers"
 CONFIG = "config"

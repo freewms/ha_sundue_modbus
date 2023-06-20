@@ -7,16 +7,18 @@ from homeassistant.helpers.entity import Entity
 
 from .common.entity_controller import EntityController
 from .common.register_type import RegisterType
-from .const import AC1
-from .const import AIO_H1
-from .const import AIO_H3
-from .const import AUX
-from .const import H1
-from .const import H3
+#from .const import AC1
+#from .const import AIO_H1
+#from .const import AIO_H3
+#from .const import AUX
+#from .const import H1
+#from .const import H3
 from .const import INVERTER_BASE
 from .const import INVERTER_CONN
-from .const import KH
+#from .const import KH
 from .const import LAN
+from .const import SUN1
+from .const import SUN2
 from .entities import invalid_ranges
 from .entities.charge_periods import CHARGE_PERIODS
 from .entities.entity_descriptions import ENTITIES
@@ -115,53 +117,63 @@ class InverterModelProfile:
 INVERTER_PROFILES = {
     x.model: x
     for x in [
-        InverterModelProfile(H1)
-        .add_connection_type(
-            AUX,
-            RegisterType.INPUT,
-            invalid_register_ranges=invalid_ranges.H1_AC1,
-        )
+#        InverterModelProfile(H1)
+#        .add_connection_type(
+#            AUX,
+#            RegisterType.INPUT,
+#            invalid_register_ranges=invalid_ranges.H1_AC1,
+#        )
+#        .add_connection_type(
+#            LAN,
+#            RegisterType.HOLDING,
+#        ),
+#        InverterModelProfile(AC1)
+#        .add_connection_type(
+#            AUX,
+#            RegisterType.INPUT,
+#            invalid_register_ranges=invalid_ranges.H1_AC1,
+#        )
+#        .add_connection_type(
+#            LAN,
+#            RegisterType.HOLDING,
+#        ),
+#        InverterModelProfile(AIO_H1)
+#        .add_connection_type(
+#            AUX,
+#            RegisterType.INPUT,
+#            invalid_register_ranges=invalid_ranges.H1_AC1,
+#        )
+#        .add_connection_type(
+#            LAN,
+#            RegisterType.HOLDING,
+#        ),
+#        # The KH doesn't have a LAN port. It supports both input and holding over RS485
+#        InverterModelProfile(KH).add_connection_type(AUX, RegisterType.INPUT),
+#        # The H3 seems to use holding registers for everything
+#        InverterModelProfile(H3)
+#        .add_connection_type(
+#            LAN,
+#            RegisterType.HOLDING,
+#        )
+#        .add_connection_type(
+#            AUX,
+#            RegisterType.HOLDING,
+#        ),
+#        InverterModelProfile(AIO_H3)
+#        .add_connection_type(
+#            AUX,
+#            RegisterType.HOLDING,
+#        )
+#        .add_connection_type(
+#            LAN,
+#            RegisterType.HOLDING,
+#        ),
+        InverterModelProfile(SUN1)
         .add_connection_type(
             LAN,
             RegisterType.HOLDING,
         ),
-        InverterModelProfile(AC1)
-        .add_connection_type(
-            AUX,
-            RegisterType.INPUT,
-            invalid_register_ranges=invalid_ranges.H1_AC1,
-        )
-        .add_connection_type(
-            LAN,
-            RegisterType.HOLDING,
-        ),
-        InverterModelProfile(AIO_H1)
-        .add_connection_type(
-            AUX,
-            RegisterType.INPUT,
-            invalid_register_ranges=invalid_ranges.H1_AC1,
-        )
-        .add_connection_type(
-            LAN,
-            RegisterType.HOLDING,
-        ),
-        # The KH doesn't have a LAN port. It supports both input and holding over RS485
-        InverterModelProfile(KH).add_connection_type(AUX, RegisterType.INPUT),
-        # The H3 seems to use holding registers for everything
-        InverterModelProfile(H3)
-        .add_connection_type(
-            LAN,
-            RegisterType.HOLDING,
-        )
-        .add_connection_type(
-            AUX,
-            RegisterType.HOLDING,
-        ),
-        InverterModelProfile(AIO_H3)
-        .add_connection_type(
-            AUX,
-            RegisterType.HOLDING,
-        )
+        InverterModelProfile(SUN2)
         .add_connection_type(
             LAN,
             RegisterType.HOLDING,

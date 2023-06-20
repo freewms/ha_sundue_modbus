@@ -58,10 +58,10 @@ from .modbus_client import ModbusClient
 from .modbus_client import ModbusClientFailedError
 from .modbus_controller import ModbusController
 
-_TITLE = "FoxESS - Modbus"
+_TITLE = "Sundue - Modbus"
 
-_DEFAULT_PORT = 502
-_DEFAULT_SLAVE = 247
+_DEFAULT_PORT = 80
+_DEFAULT_SLAVE = 1
 
 _LOGGER = logging.getLogger(__name__)
 

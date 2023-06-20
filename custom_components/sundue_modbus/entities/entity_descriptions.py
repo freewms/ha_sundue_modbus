@@ -113,13 +113,13 @@ def _pv_energy_total(key: str, models: list[EntitySpec], name: str, source_entit
 
 
 _PV_ENTITIES: list[EntityFactory] = [
-    _sun_temperature(
-        key="exhaust_water_temp",
-        addresses=[
-            ModbusAddressesSpec(models=[SUN1], holding=[59, 60]),
-        ],
-        name="Exhaust water temperature",
-    ),
+    #_sun_temperature(
+    #    key="exhaust_water_temp",
+    #    addresses=[
+    #        ModbusAddressesSpec(models=[SUN1], holding=[59, 60]),
+    #    ],
+    #    name="Exhaust water temperature",
+    #),
     _pv_voltage(
         key="pv1_voltage",
         addresses=[

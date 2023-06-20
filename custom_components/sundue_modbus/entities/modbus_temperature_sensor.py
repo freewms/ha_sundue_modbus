@@ -13,7 +13,6 @@ from homeassistant.components.sensor import SensorEntity
 from homeassistant.components.sensor import SensorEntityDescription
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity import Entity
-
 from pymodbus.constants import Endian
 from pymodbus.payload import BinaryPayloadDecoder
 

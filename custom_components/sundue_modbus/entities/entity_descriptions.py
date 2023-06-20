@@ -1614,7 +1614,7 @@ _TEMPERATURE_ENTITIES: list[EntityFactory] = [
     ModbusTemperatureSensorDescription(
         key="exhaust_coolant_temp",
         addresses=[
-            ModbusAddressesSpec(models=[H1, AIO_H1, AC1, KH], input=[11007], holding=[31021]),
+            ModbusAddressesSpec(models=[SUN1], holding=[59, 60]),
         ],
         name="Exhaust coolant temperature",        
         native_unit_of_measurement="°C",

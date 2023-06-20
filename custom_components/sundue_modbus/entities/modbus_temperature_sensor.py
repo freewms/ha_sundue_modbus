@@ -14,6 +14,9 @@ from homeassistant.components.sensor import SensorEntityDescription
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity import Entity
 
+from pymodbus.constants import Endian
+from pymodbus.payload import BinaryPayloadDecoder
+
 from ..common.entity_controller import EntityController
 from ..common.register_type import RegisterType
 from ..const import ROUND_SENSOR_VALUES
@@ -79,20 +82,22 @@ class ModbusTemperatureSensor(ModbusEntityMixin, SensorEntity):
         
     def _calculate_native_value(self) -> int | float | None:
         """Return the value reported by the sensor."""
-        original = 0
+        original = []
         for i, address in enumerate(self._addresses):
             register_value = self._controller.read(address)
             if register_value is None:
                 return None
-            original |= (register_value & 0xFFFF) << (i * 16)
+            original.append(register_value)
+            #|= (register_value & 0xFFFF) << (i * 16)
 
         entity_description = cast(ModbusTemperatureSensorDescription, self.entity_description)
 
-        if entity_description.signed:
-            sign_bit = 1 << (len(self._addresses) * 16 - 1)
-            original = (original & (sign_bit - 1)) - (original & sign_bit)
+        #if entity_description.signed:
+        #    sign_bit = 1 << (len(self._addresses) * 16 - 1)
+        #    original = (original & (sign_bit - 1)) - (original & sign_bit)
+        decoder = BinaryPayloadDecoder.fromRegisters(original, byteorder=Endian.Big)
 
-        value: float | int = original
+        value: float | int = decoder.decode_32bit_float()
 
         if entity_description.scale is not None:
             value = value * entity_description.scale

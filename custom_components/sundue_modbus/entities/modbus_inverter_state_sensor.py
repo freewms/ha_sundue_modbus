@@ -34,10 +34,10 @@ KH_INVERTER_STATES = [
     "Unrecoverable Fault",
 ]
 
-SUN1_STATES = [
+SUN_STATES = [
     "Stop",
-    "Cooling",
     "Heating",
+    "Cooling",
     "Auto",
 ]
 

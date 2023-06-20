@@ -23,7 +23,7 @@ from .modbus_battery_sensor import ModbusBatterySensorDescription
 from .modbus_fault_sensor import ModbusFaultSensorDescription
 from .modbus_integration_sensor import ModbusIntegrationSensorDescription
 from .modbus_inverter_state_sensor import H1_INVERTER_STATES
-from .modbus_inverter_state_sensor import SUN1_STATES
+from .modbus_inverter_state_sensor import SUN_STATES
 from .modbus_inverter_state_sensor import KH_INVERTER_STATES
 from .modbus_inverter_state_sensor import ModbusInverterStateSensorDescription
 from .modbus_lambda_sensor import ModbusLambdaSensorDescription
@@ -849,6 +849,12 @@ _H3_CURRENT_VOLTAGE_POWER_ENTITIES: list[EntityFactory] = [
 ]
 
 _INVERTER_ENTITIES: list[EntityFactory] = [
+    ModbusInverterStateSensorDescription(
+        key="sundue_state",
+        address=[ModbusAddressSpec(models=[SUN1], holding=200)],
+        name="Sundue state",
+        states=SUN_STATES,
+    ),
     ModbusSensorDescription(
         key="invbatpower",
         addresses=[
@@ -1139,12 +1145,6 @@ _INVERTER_ENTITIES: list[EntityFactory] = [
         address=[ModbusAddressSpec(models=[H1, AIO_H1, AC1], input=11056, holding=31027)],
         name="Inverter State",
         states=H1_INVERTER_STATES,
-    ),
-    ModbusInverterStateSensorDescription(
-        key="sundue_state",
-        address=[ModbusAddressSpec(models=[SUN1], holding=200)],
-        name="Sundue state",
-        states=SUN1_STATES,
     ),
     ModbusInverterStateSensorDescription(
         key="inverter_state",

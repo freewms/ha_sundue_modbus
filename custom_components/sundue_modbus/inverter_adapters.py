@@ -92,7 +92,8 @@ class InverterAdapter:
         return InverterAdapter(
             adapter_id=adapter_id,
             adapter_type=InverterAdapterType.NETWORK,
-            connection_type=AUX,
+            #connection_type=AUX,
+            connection_type=LAN,
             setup_link=setup_link,
             network_protocols=network_protocols,
             recommended_protocol=recommended_protocol,

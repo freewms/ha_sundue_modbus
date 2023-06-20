@@ -31,7 +31,7 @@ from slugify import slugify
 from .common.exceptions import AutoconnectFailedError
 from .common.exceptions import UnsupportedInverterError
 from .const import ADAPTER_ID
-from .const import AUX
+# from .const import AUX
 from .const import CONFIG_SAVE_TIME
 from .const import DOMAIN
 from .const import ENTITY_ID_PREFIX
@@ -47,8 +47,8 @@ from .const import MODBUS_SLAVE
 from .const import MODBUS_TYPE
 from .const import POLL_RATE
 from .const import ROUND_SENSOR_VALUES
-from .const import RTU_OVER_TCP
-from .const import SERIAL
+# from .const import RTU_OVER_TCP
+# from .const import SERIAL
 from .const import TCP
 from .const import UDP
 from .inverter_adapters import ADAPTERS

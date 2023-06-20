@@ -135,7 +135,7 @@ class FlowHandlerMixin(_FlowHandlerMixinBase):
 
 
 class ModbusFlowHandler(FlowHandlerMixin, config_entries.ConfigFlow, domain=DOMAIN):
-    """Config flow for foxess_modbus."""
+    """Config flow for sundue_modbus."""
 
     VERSION = 6
     CONNECTION_CLASS = config_entries.CONN_CLASS_LOCAL_POLL
@@ -146,8 +146,8 @@ class ModbusFlowHandler(FlowHandlerMixin, config_entries.ConfigFlow, domain=DOMA
         self._all_inverters: list[InverterData] = []
 
         self._adapter_type_to_step = {
-            InverterAdapterType.DIRECT: self.async_step_tcp_adapter,
-            InverterAdapterType.SERIAL: self.async_step_serial_adapter,
+            # InverterAdapterType.DIRECT: self.async_step_tcp_adapter,
+            # InverterAdapterType.SERIAL: self.async_step_serial_adapter,
             InverterAdapterType.NETWORK: self.async_step_tcp_adapter,
         }
 
@@ -264,15 +264,15 @@ class ModbusFlowHandler(FlowHandlerMixin, config_entries.ConfigFlow, domain=DOMA
                 }
             )
 
-        if adapter.connection_type == AUX:
-            schema_parts[vol.Required("adapter_host")] = cv.string
-            schema_parts[
-                vol.Required(
-                    "adapter_port",
-                    default=_DEFAULT_PORT,
-                )
-            ] = int
-        else:
+        #if adapter.connection_type == AUX:
+        #    schema_parts[vol.Required("adapter_host")] = cv.string
+        #    schema_parts[
+        #        vol.Required(
+        #            "adapter_port",
+        #            default=_DEFAULT_PORT,
+        #        )
+        #    ] = int
+        #else:
             # If it's a direct connection we know what the port is
             schema_parts[vol.Required("lan_connection_host")] = cv.string
 
@@ -489,12 +489,12 @@ class ModbusFlowHandler(FlowHandlerMixin, config_entries.ConfigFlow, domain=DOMA
             raise ValidationFailedError({"base": "duplicate_connection_details"})
 
         try:
-            if protocol in [TCP, UDP, RTU_OVER_TCP]:
-                params = {"host": host.split(":")[0], "port": int(host.split(":")[1])}
-            elif protocol == SERIAL:
-                params = {"port": host, "baudrate": 9600}
-            else:
-                raise AssertionError()
+            #if protocol in [TCP, UDP, RTU_OVER_TCP]:
+            params = {"host": host.split(":")[0], "port": int(host.split(":")[1])}
+            #elif protocol == SERIAL:
+            #    params = {"port": host, "baudrate": 9600}
+            #else:
+            #    raise AssertionError()
             client = ModbusClient(self.hass, protocol, adapter, params)
             base_model, full_model = await ModbusController.autodetect(client, slave, adapter)
 

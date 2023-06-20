@@ -31,8 +31,8 @@ from .const import MODBUS_SLAVE
 from .const import MODBUS_TYPE
 from .const import PLATFORMS
 from .const import POLL_RATE
-from .const import RTU_OVER_TCP
-from .const import SERIAL
+#from .const import RTU_OVER_TCP
+#from .const import SERIAL
 from .const import STARTUP_MESSAGE
 from .const import TCP
 from .const import UDP
@@ -105,11 +105,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         client_key = (inverter[MODBUS_TYPE], inverter[HOST])
         client = clients.get(client_key)
         if client is None:
-            if inverter[MODBUS_TYPE] in [TCP, UDP, RTU_OVER_TCP]:
-                host_parts = inverter[HOST].split(":")
-                params = {"host": host_parts[0], "port": int(host_parts[1])}
-            else:
-                params = {"port": inverter[HOST], "baudrate": 9600}
+            #if inverter[MODBUS_TYPE] in [TCP, UDP, RTU_OVER_TCP]:
+            host_parts = inverter[HOST].split(":")
+            params = {"host": host_parts[0], "port": int(host_parts[1])}
+            #else:
+            #    params = {"port": inverter[HOST], "baudrate": 9600}
             client = ModbusClient(hass, inverter[MODBUS_TYPE], adapter, params)
             clients[client_key] = client
         create_controller(client, inverter)
@@ -146,7 +146,8 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
             options = UNDEFINED
 
         for modbus_type, modbus_type_inverters in config_entry.data.items():
-            if modbus_type in [TCP, UDP, SERIAL]:  # Didn't have RTU_OVER_TCP then
+            #if modbus_type in [TCP, UDP, SERIAL]:  # Didn't have RTU_OVER_TCP then
+            if modbus_type in [TCP, UDP]:  # Didn't have RTU_OVER_TCP then
                 for host, host_inverters in modbus_type_inverters.items():
                     for friendly_name, inverter in host_inverters.items():
                         if friendly_name == "null":
@@ -216,10 +217,10 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
         # Having "TCP" / "UDP" / "SERIAL" in all-caps is annoying for translations in the config flow
         # Also change "TCP+RTU" to "rtu_over_tcp" (to remove "+", which makes translations annoying)
         for inverter in config_entry.data.get(INVERTERS, {}).values():
-            if inverter[MODBUS_TYPE] == "TCP+RTU":
-                inverter[MODBUS_TYPE] = "rtu_over_tcp"
-            else:
-                inverter[MODBUS_TYPE] = inverter[MODBUS_TYPE].lower()
+            #if inverter[MODBUS_TYPE] == "TCP+RTU":
+            #    inverter[MODBUS_TYPE] = "rtu_over_tcp"
+            #else:
+            inverter[MODBUS_TYPE] = inverter[MODBUS_TYPE].lower()
         config_entry.version = 6
 
     _LOGGER.info("Migration to version %s successful", config_entry.version)

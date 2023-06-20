@@ -34,6 +34,12 @@ KH_INVERTER_STATES = [
     "Unrecoverable Fault",
 ]
 
+SUN1_STATES = [
+    "Stop",
+    "Cooling",
+    "Heating",
+    "Auto",
+]
 
 @dataclass(kw_only=True)
 class ModbusInverterStateSensorDescription(SensorEntityDescription, EntityFactory):

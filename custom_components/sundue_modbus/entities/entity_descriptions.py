@@ -12,6 +12,8 @@ from ..const import AIO_H3
 from ..const import H1
 from ..const import H3
 from ..const import KH
+from ..const import SUN1
+from ..const import SUN2
 from .charge_periods import CHARGE_PERIODS
 from .entity_factory import EntityFactory
 from .inverter_model_spec import EntitySpec
@@ -21,6 +23,7 @@ from .modbus_battery_sensor import ModbusBatterySensorDescription
 from .modbus_fault_sensor import ModbusFaultSensorDescription
 from .modbus_integration_sensor import ModbusIntegrationSensorDescription
 from .modbus_inverter_state_sensor import H1_INVERTER_STATES
+from .modbus_inverter_state_sensor import SUN1_STATES
 from .modbus_inverter_state_sensor import KH_INVERTER_STATES
 from .modbus_inverter_state_sensor import ModbusInverterStateSensorDescription
 from .modbus_lambda_sensor import ModbusLambdaSensorDescription
@@ -38,6 +41,18 @@ BMS_CONNECT_STATE_ADDRESS = [
     ModbusAddressSpec(models=[H1, AIO_H1, AC1, KH], input=11058, holding=31029),
 ]
 
+def _sun_temperature(key: str, addresses: list[ModbusAddressesSpec], name: str) -> EntityFactory:
+    return ModbusSensorDescription(
+        key=key,
+        addresses=addresses,
+        name=name,
+        device_class=SensorDeviceClass.TEMPERATURE,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="C",
+        scale=1,
+        round_to=1,
+        
+    )
 
 def _pv_voltage(key: str, addresses: list[ModbusAddressesSpec], name: str) -> EntityFactory:
     return ModbusSensorDescription(
@@ -98,6 +113,13 @@ def _pv_energy_total(key: str, models: list[EntitySpec], name: str, source_entit
 
 
 _PV_ENTITIES: list[EntityFactory] = [
+    _sun_temperature(
+        key="exhaust_water_temp",
+        addresses=[
+            ModbusAddressesSpec(models=[SUN1], holding=[59, 60]),
+        ],
+        name="Exhaust water temperature",
+    ),
     _pv_voltage(
         key="pv1_voltage",
         addresses=[
@@ -1117,6 +1139,12 @@ _INVERTER_ENTITIES: list[EntityFactory] = [
         address=[ModbusAddressSpec(models=[H1, AIO_H1, AC1], input=11056, holding=31027)],
         name="Inverter State",
         states=H1_INVERTER_STATES,
+    ),
+    ModbusInverterStateSensorDescription(
+        key="sundue_state",
+        address=[ModbusAddressSpec(models=[SUN1], holding=4)],
+        name="Sundue state",
+        states=SUN1_STATES,
     ),
     ModbusInverterStateSensorDescription(
         key="inverter_state",

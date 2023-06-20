@@ -22,6 +22,7 @@ from .inverter_model_spec import ModbusAddressSpec
 from .modbus_battery_sensor import ModbusBatterySensorDescription
 from .modbus_fault_sensor import ModbusFaultSensorDescription
 from .modbus_integration_sensor import ModbusIntegrationSensorDescription
+from .modbus_temperature_sensor import ModbusTemperatureSensorDescription
 from .modbus_inverter_state_sensor import H1_INVERTER_STATES
 from .modbus_inverter_state_sensor import SUN_STATES
 from .modbus_inverter_state_sensor import KH_INVERTER_STATES
@@ -1609,12 +1610,25 @@ _CONFIGURATION_ENTITIES: list[EntityFactory] = [
         validate=[Range(0, 100)],
     ),
 ]
-
+_TEMPERATURE_ENTITIES: list[EntityFactory] = [
+    ModbusTemperatureSensorDescription(
+        key="exhaust_coolant_temp",
+        addresses=[
+            ModbusAddressesSpec(models=[H1, AIO_H1, AC1, KH], input=[11007], holding=[31021]),
+        ],
+        name="Exhaust coolant temperature",        
+        native_unit_of_measurement="°C",
+        icon="mdi:coolant-temperature",
+        scale=1,
+        round_to=1,
+    ),
+]
 ENTITIES: list[EntityFactory] = (
     _PV_ENTITIES
     + _H1_CURRENT_VOLTAGE_POWER_ENTITIES
     + _H3_CURRENT_VOLTAGE_POWER_ENTITIES
     + _INVERTER_ENTITIES
     + _CONFIGURATION_ENTITIES
+    + _TEMPERATURE_ENTITIES
     + [description for x in CHARGE_PERIODS for description in x.entity_descriptions]
 )

@@ -22,11 +22,11 @@ from .inverter_model_spec import ModbusAddressSpec
 from .modbus_battery_sensor import ModbusBatterySensorDescription
 from .modbus_fault_sensor import ModbusFaultSensorDescription
 from .modbus_integration_sensor import ModbusIntegrationSensorDescription
-from .modbus_temperature_sensor import ModbusTemperatureSensorDescription
 from .modbus_inverter_state_sensor import H1_INVERTER_STATES
 from .modbus_inverter_state_sensor import SUN_STATES
 from .modbus_inverter_state_sensor import KH_INVERTER_STATES
 from .modbus_inverter_state_sensor import ModbusInverterStateSensorDescription
+from .modbus_temperature_sensor import ModbusTemperatureSensorDescription
 from .modbus_lambda_sensor import ModbusLambdaSensorDescription
 from .modbus_number import ModbusNumberDescription
 from .modbus_select import ModbusSelectDescription

@@ -7,7 +7,7 @@ from typing import Any
 from .const import LAN
 from .const import MAX_READ
 from .const import POLL_RATE
-from .const import RTU_OVER_TCP
+#from .const import RTU_OVER_TCP
 from .const import TCP
 from .const import UDP
 

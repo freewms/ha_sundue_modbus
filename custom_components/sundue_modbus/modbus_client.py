@@ -25,8 +25,8 @@ from pymodbus.transaction import ModbusSocketFramer
 
 from .common.register_type import RegisterType
 from .const import LAN
-from .const import RTU_OVER_TCP
-from .const import SERIAL
+#from .const import RTU_OVER_TCP
+#from .const import SERIAL
 from .const import TCP
 from .const import UDP
 from .inverter_adapters import InverterAdapter
@@ -147,10 +147,10 @@ _CLIENTS = {
         "client": ModbusUdpClient,
         "framer": ModbusSocketFramer,
     },
-    RTU_OVER_TCP: {
-        "client": CustomModbusTcpClient,
-        "framer": ModbusRtuFramer,
-    },
+    #RTU_OVER_TCP: {
+    #    "client": CustomModbusTcpClient,
+    #    "framer": ModbusRtuFramer,
+    #},
 }
 
 

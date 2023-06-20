@@ -32,7 +32,8 @@ class ModbusTemperatureSensorDescription(SensorEntityDescription, EntityFactory)
 
     addresses: list[ModbusAddressesSpec]
     scale: float | None = None
-    round_to: float | None = None
+    round_to: float | None = 1
+    native_unit_of_measurement: str | None ="°C",
     post_process: Callable[[float], float] | None = None
     validate: list[BaseValidator] = field(default_factory=list)
     signed: bool = False

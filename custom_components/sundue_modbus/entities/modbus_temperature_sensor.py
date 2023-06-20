@@ -26,7 +26,6 @@ from .modbus_entity_mixin import ModbusEntityMixin
 
 _LOGGER = logging.getLogger(__name__)
 
-
 @dataclass()
 class ModbusTemperatureSensorDescription(SensorEntityDescription, EntityFactory):
     """Custom temperature sensor description"""
@@ -86,7 +85,7 @@ class ModbusTemperatureSensor(ModbusEntityMixin, SensorEntity):
             register_value = self._controller.read(address)
             if register_value is None:
                 return None
-            original.append(register_value)
+            original.insert(i,register_value)
             #|= (register_value & 0xFFFF) << (i * 16)
 
         entity_description = cast(ModbusTemperatureSensorDescription, self.entity_description)

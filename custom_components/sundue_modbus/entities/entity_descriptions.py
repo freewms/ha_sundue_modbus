@@ -1613,14 +1613,9 @@ _CONFIGURATION_ENTITIES: list[EntityFactory] = [
 _TEMPERATURE_ENTITIES: list[EntityFactory] = [
     ModbusTemperatureSensorDescription(
         key="exhaust_coolant_temp",
-        addresses=[
-            ModbusAddressesSpec(models=[SUN1], holding=[59, 60]),
-        ],
-        name="Exhaust coolant temperature",        
-        native_unit_of_measurement="°C",
+        addresses=[ModbusAddressesSpec(models=[SUN1], holding=[59, 60])],
+        name="Exhaust coolant temperature",                
         icon="mdi:coolant-temperature",
-        scale=1,
-        round_to=1,
     ),
 ]
 ENTITIES: list[EntityFactory] = (

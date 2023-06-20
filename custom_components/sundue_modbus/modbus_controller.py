@@ -28,7 +28,8 @@ _LOGGER = logging.getLogger(__name__)
 # How many failed polls before we mark sensors as Unavailable
 _NUM_FAILED_POLLS_FOR_DISCONNECTION = 5
 
-_MODEL_START_ADDRESS = 30004
+#_MODEL_START_ADDRESS = 30000
+_MODEL_START_ADDRESS = 4
 _MODEL_LENGTH = 1
 
 
@@ -337,13 +338,14 @@ class ModbusController(EntityController, UnloadController):
             # Stop as soon as we find something non-printable-ASCII
             full_model = "SUN"
             for char in result:
-                if 0x20 <= char < 0x7F:
+                _LOGGER.error("Char raed '%s' (%s)", full_model, char)
+                # Only number of modification 
+                if 0x30 <= char < 0x38:
                     full_model += chr(char)
                 else:
                     break
             # Take off tailing spaces and H3's leading space
-            full_model = full_model.strip()
-            
+            full_model = full_model.strip()     
             for model in INVERTER_PROFILES.values():
                 if full_model.startswith(model.model):
                     _LOGGER.info("Autodetected inverter as '%s' (%s)", model.model, full_model)

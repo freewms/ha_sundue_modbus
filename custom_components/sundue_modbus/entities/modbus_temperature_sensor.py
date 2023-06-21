@@ -32,7 +32,7 @@ class ModbusTemperatureSensorDescription(SensorEntityDescription, EntityFactory)
 
     addresses: list[ModbusAddressesSpec]
     scale: float | None = None
-    round_to: float | None = 1
+    round_to: float | None = None
     native_unit_of_measurement: str | None ="°C",
     post_process: Callable[[float], float] | None = None
     validate: list[BaseValidator] = field(default_factory=list)
@@ -87,15 +87,9 @@ class ModbusTemperatureSensor(ModbusEntityMixin, SensorEntity):
             if register_value is None:
                 return None
             original.append(register_value)
-            #|= (register_value & 0xFFFF) << (i * 16)
 
         entity_description = cast(ModbusTemperatureSensorDescription, self.entity_description)
-
-        #if entity_description.signed:
-        #    sign_bit = 1 << (len(self._addresses) * 16 - 1)
-        #    original = (original & (sign_bit - 1)) - (original & sign_bit)
         decoder = BinaryPayloadDecoder.fromRegisters(original, byteorder=Endian.Big, wordorder=Endian.Little)
-
         value: float | int = decoder.decode_32bit_float()
 
         if entity_description.scale is not None:
